@@ -1,4 +1,4 @@
-wp-imageplate
+WP-ImagePlate Wordpress Plugin
 =============
 
 WP-ImagePlate
