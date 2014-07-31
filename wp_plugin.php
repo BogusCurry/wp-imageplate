@@ -64,6 +64,9 @@ function translate_imageplate_shortcode($attr) {
 								<span class=\"imagecount\">
 									".$count."
 								</span>
+								<div class=\"ip-loading\">
+									<p>ImagePlate is loading images ...</p>
+								</div>
 							</div>
 							<div class=\"ip-playernav\" style=\"width:".$width."px\">
 							<img src=\"".$icons['back']."\">
@@ -71,7 +74,7 @@ function translate_imageplate_shortcode($attr) {
 							<img src=\"".$icons['next']."\">
 							</div>
 							<div class=\"ip-provided-by\">
-								View provided by WP-ImagePlate.
+								provided by WP-ImagePlate.
 							</div>
 						</div>";
 	

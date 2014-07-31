@@ -7,6 +7,23 @@ div.imageplate{
 	div.imageplate:hover{
 		cursor:grab;
 	}
+	
+div.ip-loading{
+	display:none;
+	position:absolute;
+	top:0px;
+	left:0px;
+	background-color:#EDEDED;
+	height:100%;
+	width:100%;
+	border-radius:3px;
+}
+
+	div.ip-loading p{
+		font-size:18px;
+		margin-top:30px;
+		animation: pulse 1.7s linear infinite;
+	}
 
 div.imageplate img{
 	display:none;
@@ -55,3 +72,19 @@ div.ip-provided-by{
 	color:rgba(186, 184, 184, 1);
 	text-align:right;
 }
+
+
+
+
+/* Loading screen pulse effect */
+
+@keyframes pulse {
+ 0% {
+    opacity:1.0;
+ }
+ 50% {
+    opacity:0.2;
+ }
+ 100% {
+    opacity:1.0;
+ }

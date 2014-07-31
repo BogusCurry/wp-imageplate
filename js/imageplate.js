@@ -166,6 +166,7 @@ function imagePlate(ipdiv){
 		log("Showing first pic");
 		changePicTo(0);
 		currentpic = 0;
+		picbefore = imagecount-1;
 		
 		/* Leads to error if image size is not specified in image html 
 		 Use default stacksize instead
@@ -219,5 +220,10 @@ function detect_imageplates(){
 	}
 }
 
+/* Show loading screens for every ImagePlate */
+loadingscreens = document.getElementsByClassName("ip-loading");
+for(i=0; i<loadingscreens.length; i++){
+	loadingscreens[i].style.display = "block";
+}
 
 window.onload=detect_imageplates;
