@@ -13,5 +13,6 @@ An example Shortcode in your Wordpress article can be:
 
 "src" is the path to every image. Root directory of the path is "wp-uploads/". "{num}" is a placeholder for the ascending number. "count" gives the total number of images. "height" and "width" are the dimensions of the given images.
 
-Following the example, you would have to name your image files "Camaro0.png", "Camaro1.png", "Camaro2.png"... starting with null.
+Following the example, you would have to name your image files "Camaro1.png", "Camaro2.png", 
+"Camaro3.png"... starting with number one.
 

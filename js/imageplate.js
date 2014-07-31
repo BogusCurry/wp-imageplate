@@ -16,6 +16,7 @@
 
 function imagePlate(ipdiv){
 	var currentpic;
+	var picbefore;
 	var imageplate;
 	var imagecount;
 	var imagescheme;
@@ -55,29 +56,32 @@ function imagePlate(ipdiv){
 			alert("Impossible to change picture to number "+num+"!");
 		}
 		
-		// log("Changing Pic.");
+		//log("Changing Pic.");
 
-		/* Dem aktuellen Bild einen niedrigeren Index geben. */
-		present_image = imageplate.getElementsByClassName("show");
+		// Currentpic "show" geben
+		currentpic_element = document.getElementById(ipdiv+"-img-"+num);
+		currentpic_element.className = "show";
 		
-		for(i=0; i<present_image.length;i++){
-			present_image[i].className = "";
-		}
+		// Picbefore "show" entziehen
+		picbefore_element = document.getElementById(ipdiv+"-img-"+picbefore);
+		if(!!picbefore_element){picbefore_element.className = "";}
+
 		
 		// Alle Bilder die sichtbar sind (im normalfall eins) wieder ausblenden
-		shown_elements = imageplate.getElementsByClassName("show");
+		/*shown_elements = imageplate.getElementsByClassName("show");
 		
 		for(i=0; i<shown_elements.length;i++){
 			shown_elements[i].className = "";
-		}
+		}*/
 		
 		// Bei passendem Bild auf sichtbar schalten
-		element = document.getElementById(ipdiv+"-img-"+num);
-		// log("Searching for fitting Image ID");
-		element.className = "show";
+		/*element = document.getElementById(ipdiv+"-img-"+num);
+		element.className = "show";*/
 	}
 	
 	function forwards(){
+		//log("moving forwards");
+		picbefore = currentpic;
 		currentpic++;
 		if(currentpic > imagecount-1){
 			currentpic = 0;
@@ -86,6 +90,8 @@ function imagePlate(ipdiv){
 	}
 	
 	function backwards(){
+		//log("moving backwards");
+		picbefore = currentpic;
 		currentpic--;
 		if(currentpic < 0){
 			currentpic = imagecount-1;
@@ -119,13 +125,11 @@ function imagePlate(ipdiv){
 		// current Client X contains the X-Coord of the present mouse position
 		if(prevmouseposx > currentClientX){
 			//console.log("Forward");
-			//forwards();
 			addToMovementStack("forwards");
 		}
 		
 		else if(prevmouseposx < currentClientX){
 			//console.log("Backwards");
-			//backwards();
 			addToMovementStack("backwards");
 		}
 	}
@@ -163,18 +167,21 @@ function imagePlate(ipdiv){
 		changePicTo(0);
 		currentpic = 0;
 		
-		calcStackSize();
+		/* Leads to error if image size is not specified in image html 
+		 Use default stacksize instead
+		 */
+		// calcStackSize();
 					
 		imageplate.onmousedown = function(event){
 			event.preventDefault();
-			log("mousedown");
+			//log("mousedown");
 			
 			mousedown = true;
 		};
 		
 		imageplate.onmouseup = function(event){
 			event.preventDefault();
-			log("mouseup");
+			//log("mouseup");
 			
 			mousedown = false;
 			stack = 0; // Make stack neutral
@@ -182,14 +189,14 @@ function imagePlate(ipdiv){
 		
 		imageplate.onmousemove = function(event){
 				if(mousedown){
-					// log("Mouse drag");
+					//log("Mouse drag");
 					processMouseActions(event.clientX);
 					prevmouseposx = event.clientX;
 				}	
 		};
 		
 		imageplate.onmouseleave = function(event){
-			log("mouseout, disabling movement");
+			//log("mouseout, disabling movement");
 			
 			mousedown = false;
 			stack = 0; // Make stack neutral
@@ -213,4 +220,4 @@ function detect_imageplates(){
 }
 
 
-detect_imageplates();
+window.onload=detect_imageplates;

@@ -44,12 +44,20 @@ function translate_imageplate_shortcode($attr) {
 	$icons['back'] = $icons_base_url."back.png";
 	$icons['start'] = $icons_base_url."start.png";
 	$icons['next'] = $icons_base_url."next.png";
+	
+	/* String containing HTML for all images */
+	
+	for($i=2; $i<=$count; $i++){
+		$cururl = str_replace("{num}", $i, $imageurl);
+		$allimages=$allimages."<img src=\"".$cururl."\"/>";
+	}
 		
 	$imageplatehtml = 	"
 						<div class=\"imageplate-wrapper\">
-							<div class=\"imageplate\" style=\"height:".$height."px; width:".$width."px;\">
-								<noscript><p class=\"imageplate-nojs\">Warning: Please enable <b>Javascript</b> on this page to view the 3D images provided by ImagePlate.</p></noscript>
+							<noscript><p class=\"imageplate-nojs\">Please notice: <b>Javascript</b> is required to grab and turn the 3D model above.</p></noscript>
+							<div class=\"imageplate\">
 								<img class=\"show\" src=\"".$firstpicurl."\"/>
+								".$allimages."
 								<span class=\"imagescheme\">
 									".$imageurl."
 								</span>
@@ -57,10 +65,13 @@ function translate_imageplate_shortcode($attr) {
 									".$count."
 								</span>
 							</div>
-							<div class=\"playernav\" style=\"width:".$width."px\">
+							<div class=\"ip-playernav\" style=\"width:".$width."px\">
 							<img src=\"".$icons['back']."\">
 							<img src=\"".$icons['start']."\">
 							<img src=\"".$icons['next']."\">
+							</div>
+							<div class=\"ip-provided-by\">
+								View provided by WP-ImagePlate.
 							</div>
 						</div>";
 	

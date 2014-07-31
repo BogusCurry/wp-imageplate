@@ -1,5 +1,8 @@
 div.imageplate{
 	position:relative;
+	height:auto;
+	width:auto;
+	text-align:center;
 }
 	div.imageplate:hover{
 		cursor:grab;
@@ -7,10 +10,12 @@ div.imageplate{
 
 div.imageplate img{
 	display:none;
+	max-width:100%;
+	height:auto;
 }
 	
 div.imageplate img.show{
-	display:inline;
+	display:block;
 }
 
 span.imagecount, span.imagescheme{
@@ -24,7 +29,7 @@ p.imageplate-nojs{
 	background-color: rgba(255, 201, 201, 1);
 }
 
-div.playernav{
+div.ip-playernav{
 	position:absolute;
 	z-index:2;
 	height:30px;
@@ -36,8 +41,17 @@ div.playernav{
 	display:none;
 }
 
-	div.playernav img{
+	div.ip-playernav img{
 		height:20px;
 		width:auto;
 		padding:3px;
 	}
+
+div.ip-provided-by{
+	position:relative;
+	width:100%;
+	height:auto;
+	font-size:10px;
+	color:rgba(186, 184, 184, 1);
+	text-align:right;
+}
