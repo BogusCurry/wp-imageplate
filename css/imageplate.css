@@ -7,9 +7,16 @@ div.imageplate{
 	div.imageplate:hover{
 		cursor:grab;
 	}
+
+div.mouse-tracker{
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:100%;
+}
 	
 div.ip-loading{
-	display:none;
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -21,7 +28,7 @@ div.ip-loading{
 	div.ip-loading p{
 		font-size:18px;
 		margin-top:30px;
-		animation: pulse 1.7s linear infinite;
+		/*animation: pulse 1.7s linear infinite;*/
 	}
 
 div.imageplate img{

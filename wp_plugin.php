@@ -44,29 +44,18 @@ function translate_imageplate_shortcode($attr) {
 	$icons['back'] = $icons_base_url."back.png";
 	$icons['start'] = $icons_base_url."start.png";
 	$icons['next'] = $icons_base_url."next.png";
-	
-	/* String containing HTML for all images */
-	
-	for($i=2; $i<=$count; $i++){
-		$cururl = str_replace("{num}", $i, $imageurl);
-		$allimages=$allimages."<img src=\"".$cururl."\"/>";
-	}
 		
 	$imageplatehtml = 	"
 						<div class=\"imageplate-wrapper\">
 							<noscript><p class=\"imageplate-nojs\">Please notice: <b>Javascript</b> is required to grab and turn the 3D model above.</p></noscript>
 							<div class=\"imageplate\">
 								<img class=\"show\" src=\"".$firstpicurl."\"/>
-								".$allimages."
 								<span class=\"imagescheme\">
 									".$imageurl."
 								</span>
 								<span class=\"imagecount\">
 									".$count."
 								</span>
-								<div class=\"ip-loading\">
-									<p>ImagePlate is loading images ...</p>
-								</div>
 							</div>
 							
 							<div class=\"ip-provided-by\">

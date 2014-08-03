@@ -18,7 +18,9 @@ function imagePlate(ipdiv){
 	var currentpic;
 	var picbefore;
 	var imageplate;
+	var mousetracker;
 	var imagecount;
+	var loadedimages = 0;
 	var imagescheme;
 	var images = new Array();
 	var mousedown = false;
@@ -28,6 +30,35 @@ function imagePlate(ipdiv){
 	
 	function log(message){
 		console.log("Instance "+ipdiv+" says: "+message);
+	}
+	
+	function removeLoadingScreen(){
+		log("Removing loading screen ...");
+		loadingscreen = imageplate.getElementsByClassName('ip-loading')[0];
+	    imageplate.removeChild(loadingscreen);
+	}
+	
+	function preloadImages(imgarr) {
+	    if (!preloadImages.list) {
+	        preloadImages.list = [];
+	    }
+	    for (var i = 0; i < imgarr.length; i++) {
+	        var img = new Image();
+	        img.onload = function() {
+	            var index = preloadImages.list.indexOf(this);
+	            loadedimages++;
+	            loadingscreen = imageplate.getElementsByClassName('ip-loading')[0];
+	            loadingscreen_html = "<p>ImagePlate is loading images ("+loadedimages+" of "+imagecount+")</p>";
+	            loadingscreen.innerHTML = loadingscreen_html;
+	            if(loadedimages == imagecount){
+	            	// Remove the loading screen
+	            	log("All images loaded and ready.");
+	            	removeLoadingScreen();
+	            }
+	        };
+	        preloadImages.list.push(img);
+	        img.src = imgarr[i];
+	    }
 	}
 	
 	this.setupImageplate = function(){
@@ -49,6 +80,8 @@ function imagePlate(ipdiv){
 		for(i=0; i<imagecount; i++){
 			images[i] = imagescheme.replace("{num}", i+1);
 		}
+		
+		preloadImages(images);
 	};
 	
 	function changePicTo(num){
@@ -122,13 +155,17 @@ function imagePlate(ipdiv){
 		}
 	}
 	
-	function loadImages(){
+	function loadDOM(){
 		// Lädt alle Bilder ins DOM
 		var html = "";
 		
 		for(i=0; i < images.length; i++){
 			html = html+"<img id=\""+ipdiv+"-img-"+i+"\" src=\""+images[i]+"\"/> ";
 		}
+		
+		html = html+"<div class='ip-loading'><p>ImagePlate is loading images (0 of "+imagecount+")</p></div>";
+		
+		html = html+"<div class='mouse-tracker'></div>";
 		
 		imageplate.innerHTML = html;
 	}
@@ -137,27 +174,29 @@ function imagePlate(ipdiv){
 	this.initialize = function(){
 		log("Initializing imageplate with DIV ID "+ipdiv);
 		log("Loading images into DOM");
-		loadImages();
+		loadDOM();
 		
 		log("Showing first pic");
 		changePicTo(0);
 		currentpic = 0;
 		picbefore = imagecount-1;
+		
+		mousetracker = imageplate.getElementsByClassName('mouse-tracker')[0];
 					
-		imageplate.onmousedown = function(event){
+		mousetracker.onmousedown = function(event){
 			event.preventDefault();
 			//log("mousedown");		
 			mousedown = true;
 		};
 		
-		imageplate.onmouseup = function(event){
+		mousetracker.onmouseup = function(event){
 			event.preventDefault();
 			//log("mouseup");		
 			mousedown = false;
 			stack = 0; // Make stack neutral
 		};
 		
-		imageplate.onmousemove = function(event){
+		mousetracker.onmousemove = function(event){
 				//log("Mouse move event");
 				if(mousedown){
 					//log("Mouse drag");
@@ -166,16 +205,11 @@ function imagePlate(ipdiv){
 				}	
 		};
 		
-		/*
-		 * Problem: Chromium sieht ein "mouseout" wenn ein Bild gegen ein anderes ausgetauscht wird.
-		 * Grund: Fokus verschwindet von Bild wenn getauscht wird, mouseout wird erkannt.
-		 * Möglicher Bugfix: Ein anderer DIV Layer (beobachtet nur Maus) muss permanent über den Bildern liegen, ist transparent.
-		 */
-		/*imageplate.onmouseleave = function(event){
+		mousetracker.onmouseleave = function(event){
 			log("mouseout, disabling movement");			
 			mousedown = false;
 			stack = 0; // Make stack neutral
-		};*/
+		};
 	};
 	
 	this.setupImageplate();
