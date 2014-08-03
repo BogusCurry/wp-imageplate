@@ -25,13 +25,13 @@ function imagePlate(ipdiv){
 	var prevmouseposx;
 	var stack = 0;
 	var stacksize = 4;
-	var imageplate_index;
 	
 	function log(message){
 		console.log("Instance "+ipdiv+" says: "+message);
 	}
 	
 	this.setupImageplate = function(){
+		log("Setting up imageplate with DIV ID "+ipdiv);
 		imageplate = document.getElementById(ipdiv);
 		imagescheme = imageplate.getElementsByClassName('imagescheme')[0].innerHTML;
 		imagecount = imageplate.getElementsByClassName('imagecount')[0].innerHTML.valueOf();
@@ -65,18 +65,6 @@ function imagePlate(ipdiv){
 		// Picbefore "show" entziehen
 		picbefore_element = document.getElementById(ipdiv+"-img-"+picbefore);
 		if(!!picbefore_element){picbefore_element.className = "";}
-
-		
-		// Alle Bilder die sichtbar sind (im normalfall eins) wieder ausblenden
-		/*shown_elements = imageplate.getElementsByClassName("show");
-		
-		for(i=0; i<shown_elements.length;i++){
-			shown_elements[i].className = "";
-		}*/
-		
-		// Bei passendem Bild auf sichtbar schalten
-		/*element = document.getElementById(ipdiv+"-img-"+num);
-		element.className = "show";*/
 	}
 	
 	function forwards(){
@@ -145,21 +133,9 @@ function imagePlate(ipdiv){
 		imageplate.innerHTML = html;
 	}
 	
-	function calcStackSize(){
-		imgwidth = imageplate.style.width;
-		imgwidth = parseInt(imgwidth);
-		log("Image width: "+imgwidth);
-		
-		stacksize = (imgwidth / imagecount)/5;
-		log("Stack size: "+stacksize);
-		
-		if(stacksize < 5){
-			stacksize = 5;
-			log("Stack value was too low, correcting ...");
-		}
-	}
 	
 	this.initialize = function(){
+		log("Initializing imageplate with DIV ID "+ipdiv);
 		log("Loading images into DOM");
 		loadImages();
 		
@@ -167,28 +143,22 @@ function imagePlate(ipdiv){
 		changePicTo(0);
 		currentpic = 0;
 		picbefore = imagecount-1;
-		
-		/* Leads to error if image size is not specified in image html 
-		 Use default stacksize instead
-		 */
-		// calcStackSize();
 					
 		imageplate.onmousedown = function(event){
 			event.preventDefault();
-			//log("mousedown");
-			
+			//log("mousedown");		
 			mousedown = true;
 		};
 		
 		imageplate.onmouseup = function(event){
 			event.preventDefault();
-			//log("mouseup");
-			
+			//log("mouseup");		
 			mousedown = false;
 			stack = 0; // Make stack neutral
 		};
 		
 		imageplate.onmousemove = function(event){
+				//log("Mouse move event");
 				if(mousedown){
 					//log("Mouse drag");
 					processMouseActions(event.clientX);
@@ -196,12 +166,16 @@ function imagePlate(ipdiv){
 				}	
 		};
 		
-		imageplate.onmouseleave = function(event){
-			//log("mouseout, disabling movement");
-			
+		/*
+		 * Problem: Chromium sieht ein "mouseout" wenn ein Bild gegen ein anderes ausgetauscht wird.
+		 * Grund: Fokus verschwindet von Bild wenn getauscht wird, mouseout wird erkannt.
+		 * Möglicher Bugfix: Ein anderer DIV Layer (beobachtet nur Maus) muss permanent über den Bildern liegen, ist transparent.
+		 */
+		/*imageplate.onmouseleave = function(event){
+			log("mouseout, disabling movement");			
 			mousedown = false;
 			stack = 0; // Make stack neutral
-		};
+		};*/
 	};
 	
 	this.setupImageplate();
@@ -212,15 +186,15 @@ function detect_imageplates(){
 	imageplates = document.getElementsByClassName("imageplate");
 	instances = new Array();
 	
-	for(i=0; i<imageplates.length;i++){
-		imageplateid = "imageplate-"+i;
-		console.log("Detected instance for DIV: "+imageplateid);
-		imageplates[i].id = imageplateid;
-		instances[i] = new imagePlate(imageplateid);
+	for(ic=0; ic<imageplates.length;ic++){
+		imageplateid = "imageplate-"+ic;
+		console.log("Detected new instance nr. "+ic+" ... giving DIV ID "+imageplateid);		
+		imageplates[ic].id = imageplateid;
+		instances[ic] = new imagePlate(imageplateid);
 	}
 }
 
-/* Show loading screens for every ImagePlate */
+/* Show loading screen for every ImagePlate */
 loadingscreens = document.getElementsByClassName("ip-loading");
 for(i=0; i<loadingscreens.length; i++){
 	loadingscreens[i].style.display = "block";
