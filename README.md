@@ -1,18 +1,25 @@
 WP-ImagePlate Wordpress Plugin
 =============
 
-WP-ImagePlate helps you to show 3D Models online. Just upload some images, which show your model in every 360° angle. Then tell WP-Imageplate where to find the image collection and put the Shortcode into your article.
+[English version below]
 
-WP-Imageplate converts the shortcode to a special HTML area in which you can drag the model with your mouse. The plugin exchanges the pictures automatically, to a 360° view is shown to the user.
+WP-ImagePlate stellt seine 2D Bilder so dar, dass der Benutzer durch einfaches Ziehen mit der Maus zwischen den Bildern wechseln kann. Auf diese Weise wird eine
+einfache, dreidimensionale Darstellung z.B. eines Modells erreicht.
 
-You can see an online example here (at the bottom of the page): [Camaro Model Download](https://matthias-leister.de/projekte/chevrolet-camaro-kostenloser-download/)
+Das darzustellende Objekt wird aus verschiedenen Perspektiven gerendert oder fotografiert und die Bilder in Wordpress hochgeladen. Über einen einfachen Shortcode kann 
+WP-ImagePlate in jeden Beitrag eingebunden werden - auch mehrere "ImagePlates" können in einem Beitrag genutzt werden. Im Shortcode werden die Bilderquelle, die Dimensionen 
+der Bilder und ihre Anzahl festgelegt. Alles weitere erledigt das Plugin automatisch, sodass eine schnelle und einfache Handhabung gewährleistet ist.
 
-An example Shortcode in your Wordpress article can be:
+Ein Beispiel für einen Wordpress Shortcode:
 
-[imageplate src="2014/05/Camaro{num}.png" count="36" height="360" width="720"]
+<code>[imageplate src="2014/05/Camaro{num}.png" count="36" height="360" width="720"]</code>
 
-"src" is the path to every image. Root directory of the path is "wp-uploads/". "{num}" is a placeholder for the ascending number. "count" gives the total number of images. "height" and "width" are the dimensions of the given images.
+Das Wurzelverzeichnis für "src" ist "wp-uploads/" im Wordpress root. "{num}" ist ein Platzhalter für die Bildnummer. Die Bilder müssen in diesem Beispiel also nach folgendem Schema
+nummeriert benannt sein: "Camaro1.png", "Camaro2.png" etc. - beginnend mit der Ziffer 1.
 
-Following the example, you would have to name your image files "Camaro1.png", "Camaro2.png", 
-"Camaro3.png"... starting with number one.
+Ein Beispiel, wie eine solche ImagePlate Darstellung aussehen kann (und wie sie funktioniert) findest du auf folgender Seite:
+
+[Camaro Model Download](https://matthias-leister.de/projekte/chevrolet-camaro-kostenloser-download/)
+ 
+
 
