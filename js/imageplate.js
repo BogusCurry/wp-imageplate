@@ -28,6 +28,7 @@ function imagePlate(ipdiv){
 	var stack = 0;
 	var stacksize = 4;
 	
+	/* Display nice log messages */
 	function log(message){
 		console.log("Instance "+ipdiv+" says: "+message);
 	}
@@ -38,6 +39,7 @@ function imagePlate(ipdiv){
 	    imageplate.removeChild(loadingscreen);
 	}
 	
+	/* Loads the images into browser cache and removes the loading screen when finished. */
 	function preloadImages(imgarr) {
 	    if (!preloadImages.list) {
 	        preloadImages.list = [];
@@ -81,21 +83,22 @@ function imagePlate(ipdiv){
 			images[i] = imagescheme.replace("{num}", i+1);
 		}
 		
+		/* Pre-load images into browser cache */
 		preloadImages(images);
 	};
 	
 	function changePicTo(num){
+		//log("Changing Pic.");
+		
 		if(num >= imagecount || num < 0){
 			alert("Impossible to change picture to number "+num+"!");
 		}
-		
-		//log("Changing Pic.");
 
-		// Currentpic "show" geben
+		// give current picture "show" CSS class
 		currentpic_element = document.getElementById(ipdiv+"-img-"+num);
 		currentpic_element.className = "show";
 		
-		// Picbefore "show" entziehen
+		// remove "show" CSS class from picture before
 		picbefore_element = document.getElementById(ipdiv+"-img-"+picbefore);
 		if(!!picbefore_element){picbefore_element.className = "";}
 	}
@@ -142,6 +145,7 @@ function imagePlate(ipdiv){
 	}
 	
 	
+	/* Compute mouse direction */
 	function processMouseActions(currentClientX){
 		// current Client X contains the X-Coord of the present mouse position
 		if(prevmouseposx > currentClientX){
@@ -155,16 +159,15 @@ function imagePlate(ipdiv){
 		}
 	}
 	
+	/* Load more HTML into DOM */
 	function loadDOM(){
-		// Lädt alle Bilder ins DOM
 		var html = "";
 		
 		for(i=0; i < images.length; i++){
 			html = html+"<img id=\""+ipdiv+"-img-"+i+"\" src=\""+images[i]+"\"/> ";
 		}
 		
-		html = html+"<div class='ip-loading'><p>ImagePlate is loading images (0 of "+imagecount+")</p></div>";
-		
+		html = html+"<div class='ip-loading'><p>ImagePlate is loading images (0 of "+imagecount+")</p></div>";		
 		html = html+"<div class='mouse-tracker'></div>";
 		
 		imageplate.innerHTML = html;
@@ -216,6 +219,7 @@ function imagePlate(ipdiv){
 	this.initialize();
 };
 
+/* Detect ImagePlate HTML and make new instances */
 function detect_imageplates(){
 	imageplates = document.getElementsByClassName("imageplate");
 	instances = new Array();

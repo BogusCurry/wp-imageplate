@@ -30,8 +30,6 @@
 
 
 function translate_imageplate_shortcode($attr) {
-	$width = $attr['width'];
-	$height = $attr['height'];
 	$upload_dir = wp_upload_dir();
 	$upload_dir = $upload_dir['baseurl'];	
 	$scheme = $attr['src'];	
@@ -39,11 +37,11 @@ function translate_imageplate_shortcode($attr) {
 	$count = $attr['count'];
 	$firstpicurl = str_replace("{num}", "1", $imageurl);
 	
-	$icons_base_url = plugin_dir_url( __FILE__ )."/icons/";
+	/*$icons_base_url = plugin_dir_url( __FILE__ )."/icons/";
 	$icons = Array();
 	$icons['back'] = $icons_base_url."back.png";
 	$icons['start'] = $icons_base_url."start.png";
-	$icons['next'] = $icons_base_url."next.png";
+	$icons['next'] = $icons_base_url."next.png";*/
 		
 	$imageplatehtml = 	"
 						<div class=\"imageplate-wrapper\">
@@ -67,6 +65,7 @@ function translate_imageplate_shortcode($attr) {
 }
 
 
+/* Link the ImagePlate CSS file */
 function include_imageplate_css(){
 	wp_enqueue_style( 
 		'imageplate-css', 
@@ -76,7 +75,6 @@ function include_imageplate_css(){
 
 
 /* Link the ImagePlate JS file */
-
 function include_imageplate_js() {
 	wp_enqueue_script(
 		'imageplate-js',
@@ -88,7 +86,7 @@ function include_imageplate_js() {
 	include_imageplate_css();
 }
 
-
-
+/* Embed script */
 add_action( 'wp_enqueue_scripts', 'include_imageplate_js' );
+/* ... and add shotcode processing */
 add_shortcode( 'imageplate', 'translate_imageplate_shortcode' );
