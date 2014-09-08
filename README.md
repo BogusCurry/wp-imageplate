@@ -5,7 +5,8 @@
 WP-Imageplate ermöglicht er dir, 360°-Ansichten von Modellen in deinem Blog darzustellen. 
 
 Das darzustellende Objekt wird aus verschiedenen Perspektiven gerendert oder fotografiert und die Bilder in Wordpress hochgeladen. Über einen einfachen Shortcode kann 
-WP-ImagePlate in jeden Beitrag eingebunden werden - auch mehrere "ImagePlates" können in einem Beitrag genutzt werden. Im Shortcode werden die Bilderquelle und die Anzahl der Bilder festgelegt. Alles weitere erledigt das Plugin automatisch, sodass eine schnelle und einfache Handhabung gewährleistet ist.
+WP-ImagePlate in jeden Beitrag eingebunden werden - auch mehrere "ImagePlates" können in einem Beitrag genutzt werden. Im Shortcode werden die Bilderquelle und die Anzahl der Bilder festgelegt. 
+Alles weitere erledigt das Plugin automatisch, sodass eine schnelle und einfache Handhabung gewährleistet ist. Das Modell wird mit der Maus gegriffen und gezogen.
 
 Ein Beispiel für einen Wordpress Shortcode:
 
@@ -22,7 +23,7 @@ Ein Beispiel, wie eine solche ImagePlate Darstellung aussehen kann (und wie sie 
 
 ### English version
 
-WP-ImagePlate allows you to generate a 360°-view of an object, just by adding rendered images or photos of a certain object. 
+WP-ImagePlate allows you to generate a 360°-view of an object, just by adding rendered images or photos of a certain object. Your visitors then are able to rotate the object with their mouse - just by grabbing and dragging.
 
 * Rotate your model and make images of it e.g. in 10°-steps. 
 * Rename your image files according to their order: model1.jpg, model2.jpg, model3.jpg etc...
