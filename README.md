@@ -28,7 +28,7 @@ WP-ImagePlate allows you to generate a 360°-view of an object, just by adding r
 * Rotate your model and make images of it e.g. in 10°-steps. 
 * Rename your image files according to their order: model1.jpg, model2.jpg, model3.jpg etc...
 * Upload images to wordpress
-* Put the Wordpress shortcode into your post code: <br/><code>[imageplate src="2014/05/Camaro{num}.png" count="36"]</code> <br> Where "src" is the filename-scheme ("{num}" represents the number, do not replace!, root directory is "wp-uploads/") and "count" gives the total number of images.
+* Put the Wordpress shortcode into your post code: <br/><code>[imageplate src="2014/05/Camaro{num}.png" count="36"]</code> <br> Where "src" is the filename-scheme ("{num}" represents the number,  root directory is "wp-uploads/") and "count" gives the total number of images.
 * Save your post and have fun! :)
 
 An example of WP-ImagePlate is available here: [Camaro Model Download](https://matthias-leister.de/projekte/chevrolet-camaro-kostenloser-download/) (At the end of the post)
